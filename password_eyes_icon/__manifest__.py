@@ -18,7 +18,7 @@ Features:
     'license': 'LGPL-3',
     'depends': [
         'web', 
-        'auth_signup' 
+        # 'auth_signup' 
         # Uncomment this code if you want to show the icon on signup and reset password pages
     ],
     'data': [

@@ -15,18 +15,15 @@
     
     <!-- Uncomment this code if you want to show the icon on signup and reset password pages -->
 
-    <template id="fix_signup_toggle" inherit_id="auth_signup.signup" name="Fix Signup Toggle Icons">
+    <!-- <template id="fix_signup_toggle" inherit_id="auth_signup.signup" name="Fix Signup Toggle Icons">
         <xpath expr="//form" position="before">
             <script type="text/javascript">
             <![CDATA[
                 document.addEventListener('DOMContentLoaded', function() {
-                    // Fix overlap issue - hide reset icons
                     var resetIcons = document.querySelectorAll('#password_toggle_reset, #password_toggle_reset_confirm');
                     for (var i = 0; i < resetIcons.length; i++) {
-                        resetIcons[i].style.display = 'none !important';
+                        resetIcons[i].remove();
                     }
-                    
-                    // Show signup icons
                     var signupIcons = document.querySelectorAll('#password_toggle_signup, #password_toggle_confirm');
                     for (var i = 0; i < signupIcons.length; i++) {
                         signupIcons[i].style.display = 'inline-block';
@@ -45,7 +42,7 @@
             <attribute name="class">form-group field-password position-relative</attribute>
         </xpath>
         <xpath expr="//input[@name='password']" position="after">
-            <span class="fa fa-eye-slash password-toggle" id="password_toggle_signup" style="display: none !important;"/>
+            <span class="fa fa-eye-slash password-toggle" id="password_toggle_signup"/>
         </xpath>
     </template>
     
@@ -57,7 +54,7 @@
             <attribute name="class">form-group field-password position-relative</attribute>
         </xpath>
         <xpath expr="//input[@name='confirm_password']" position="after">
-            <span class="fa fa-eye-slash password-toggle" id="password_toggle_confirm" style="display: none !important;"/>
+            <span class="fa fa-eye-slash password-toggle" id="password_toggle_confirm"/>
         </xpath>
     </template>
 
@@ -91,13 +88,10 @@
             <script type="text/javascript">
             <![CDATA[
                 document.addEventListener('DOMContentLoaded', function() {
-                    // Fix overlap issue - hide signup icons
                     var signupIcons = document.querySelectorAll('#password_toggle_signup, #password_toggle_confirm');
                     for (var i = 0; i < resetIcons.length; i++) {
-                        resetIcons[i].style.display = 'none !important';
+                        resetIcons[i].remove();
                     }
-                    
-                    // Show reset icons
                     var resetIcons = document.querySelectorAll('#password_toggle_reset, #password_toggle_reset_confirm');
                     for (var i = 0; i < signupIcons.length; i++) {
                         signupIcons[i].style.display = 'inline-block';
@@ -106,5 +100,5 @@
             ]]>
             </script>
         </xpath>
-    </template>
+    </template> -->
 </odoo> 
