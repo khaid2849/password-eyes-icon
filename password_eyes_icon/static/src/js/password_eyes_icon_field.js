@@ -1,51 +1,43 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { CharField } from "@web/views/fields/char/char_field";
-import { PasswordEyesIcon } from "./password_eyes_icon";
+import { standardFieldProps } from "@web/views/fields/standard_field_props";
+import { _lt } from "@web/core/l10n/translation";
+import { Component, useState } from "@odoo/owl";
 
-export class PasswordEyesIconField extends CharField {
-  static template = "password_eyes_icon.PasswordEyesIconField";
-  static components = { PasswordEyesIcon };
-
-  static props = {
-    ...CharField.props,
-    value: { type: String, optional: true },
-    update: { type: Function, optional: true },
-    placeholder: { type: String, optional: true },
-    string: { type: String, optional: true },
-  };
-
-  get passwordIconProps() {
-    return {
-      id: this.props.id,
+class PasswordEyesIconField extends Component {
+  setup() {
+    this.state = useState({
+      isPasswordVisible: false,
       value: this.props.value || "",
-      readonly: this.props.readonly,
-      update: (value) => this.props.update(value),
-      placeholder: this.props.placeholder || "",
-    };
+    });
+  }
+
+  togglePasswordVisibility() {
+    this.state.isPasswordVisible = !this.state.isPasswordVisible;
+  }
+
+  onChange(ev) {
+    this.state.value = ev.target.value;
+    this.props.update(this.state.value);
+  }
+
+  get inputType() {
+    return this.state.isPasswordVisible ? "text" : "password";
+  }
+
+  get eyeIconClass() {
+    return this.state.isPasswordVisible ? "fa fa-eye-slash" : "fa fa-eye";
   }
 }
 
-export const passwordEyesIconField = {
-  component: PasswordEyesIconField,
-  supportedTypes: ["char"],
-  extractProps: (fieldInfo) => {
-    const { attrs, field, record } = fieldInfo;
-    const value = record && record.data ? record.data[field.name] || "" : "";
-    const updateFunc = record ? record.update.bind(record) : () => {};
-
-    return {
-      id: attrs.id,
-      readonly: fieldInfo.readonly ?? attrs.readonly ?? false,
-      placeholder: attrs.placeholder,
-      value: value,
-      record: record,
-      name: field.name,
-      update: updateFunc,
-      string: field.string,
-    };
-  },
+PasswordEyesIconField.template = "password_eyes_icon.PasswordEyesIconField";
+PasswordEyesIconField.props = {
+  ...standardFieldProps,
+  placeholder: { type: String, optional: true },
 };
 
-registry.category("fields").add("password_eyes_icon", passwordEyesIconField);
+PasswordEyesIconField.displayName = _lt("Password Field with Toggle");
+PasswordEyesIconField.supportedTypes = ["char"];
+
+registry.category("fields").add("password_eyes_icon", PasswordEyesIconField);

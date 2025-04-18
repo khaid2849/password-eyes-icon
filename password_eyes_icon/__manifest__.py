@@ -2,7 +2,7 @@
 {
     'name': 'Password Eyes Icon Widget',
     'version': '1.0',
-    'summary': 'Adds an eye icon to toggle visibility for password-like fields.',
+    'summary': 'Adds an eye icon to toggle visibility for password-like fields in Odoo 16.',
     'description': """
 Adds a custom field widget for backend forms and also adds visibility toggle icons 
 to password fields on public Login, Signup, and Reset Password pages.
@@ -17,9 +17,8 @@ Features:
     'author': 'Gout',
     'license': 'LGPL-3',
     'depends': [
-        'web', 
-        # 'auth_signup' 
-        # Uncomment this code if you want to show the icon on signup and reset password pages
+        'web',
+        'auth_signup'
     ],
     'data': [
         'views/web_templates.xml',
@@ -27,7 +26,6 @@ Features:
     'assets': {
         'web.assets_backend': [
             'password_eyes_icon/static/src/scss/password_eyes_icon.scss',
-            'password_eyes_icon/static/src/js/password_eyes_icon.js',
             'password_eyes_icon/static/src/js/password_eyes_icon_field.js',
             'password_eyes_icon/static/src/xml/password_eyes_icon.xml',
         ],
@@ -36,7 +34,7 @@ Features:
             'password_eyes_icon/static/src/js/password_toggle_public.js',
         ],
         'web.assets_public': [
-            'password_eyes_icon/static/src/scss/password_eyes_icon.scss',
+            'password_eyes_icon/static/src/scss/password_eyes_icon.scss', 
             'password_eyes_icon/static/src/js/password_toggle_public.js',
         ],
     },
